@@ -1,5 +1,4 @@
 defmodule Optipng do
-
   @moduledoc """
   Optipng use the command line `optipng` to optimise images.
   """
@@ -10,14 +9,10 @@ defmodule Optipng do
   """
   @spec optimise(binary, pid) :: pid
   def optimise(raw, from)
-  when is_binary(raw) and
-  is_pid(from) do
-
-    spawn(
-      fn ->
-        send from, optimise(raw)
-      end
-    )
+      when is_binary(raw) and is_pid(from) do
+    spawn(fn ->
+      send(from, optimise(raw))
+    end)
   end
 
   @doc """
@@ -33,18 +28,14 @@ defmodule Optipng do
     end
   end
 
-
   defp save_as_file(content) do
-    with {:ok, path} = Temp.path,
-         :ok = File.write(path, content, [:binary]) do
+    with {:ok, path} = Temp.path(), :ok = File.write(path, content, [:binary]) do
       {:ok, path}
     end
   end
-
 
   defp invoke_optipng(path) do
     {_, 0} = System.cmd("optipng", [path])
     :ok
   end
-
 end

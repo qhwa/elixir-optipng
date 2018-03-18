@@ -3,18 +3,20 @@ defmodule OptipngTest do
   doctest Optipng
 
   test "optimise png content" do
-    ret = "test/fixtures/1.png"
-          |> File.read!
-          |> Optipng.optimise
-          
+    ret =
+      "test/fixtures/1.png"
+      |> File.read!()
+      |> Optipng.optimise()
+
     assert {:ok, _} = ret
   end
 
   test "optimise with process" do
-    ret = "test/fixtures/1.png"
-          |> File.read!
-          |> Optipng.optimise(self())
-          
+    ret =
+      "test/fixtures/1.png"
+      |> File.read!()
+      |> Optipng.optimise(self())
+
     assert Process.alive?(ret)
 
     receive do
