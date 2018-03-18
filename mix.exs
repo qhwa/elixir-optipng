@@ -7,6 +7,7 @@ defmodule Optipng.MixProject do
       version: "0.1.0",
       elixir: "~> 1.6",
       start_permanent: Mix.env() == :prod,
+      mod: {Optipng.App, []},
       deps: deps()
     ]
   end
