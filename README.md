@@ -47,3 +47,5 @@ receive do
     # deal with it
 end
 ```
+
+[documentation](https://hexdocs.pm/optipng/0.1.0/)
