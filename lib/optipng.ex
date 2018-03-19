@@ -1,6 +1,8 @@
 defmodule Optipng do
   @moduledoc """
   Optipng use the command line `optipng` to optimise images.
+  To use this module, make sure you have `optipng` executable
+  in you $PATH.
   """
 
   @doc """

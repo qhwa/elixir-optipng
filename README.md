@@ -1,11 +1,13 @@
 # Optipng
 
-**TODO: Add description**
+[![Inline docs](http://inch-ci.org/github/qhwa/elixir-optipng.svg)](http://inch-ci.org/github/qhwa/elixir-optipng)
+
+This module is a simple wrapper of `optipng` command line application for optimising PNG images.  
+To use this module, make sure you have `optipng` executable in you $PATH.
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `optipng` to your list of dependencies in `mix.exs`:
+add `optipng` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
@@ -15,7 +17,33 @@ def deps do
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/optipng](https://hexdocs.pm/optipng).
 
+## Usage
+
+### `optimise/1`
+
+```elixir
+file_path = "my-pretty-image.png"
+
+file_path
+|> File.read!
+|> Optipng.optimise
+#=> {:ok, optimised_content}
+```
+
+### `optimise/2`
+
+```elixir
+file_path = "my-pretty-image.png"
+
+file_path
+|> File.read!
+|> Optipng.optimise(self())
+
+# continue doing anything you want
+
+receive do
+  {:ok, optimised_content} ->
+    # deal with it
+end
+```
